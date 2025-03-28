@@ -3,11 +3,12 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Plus, User, ArrowRight, File, MessageSquare, Mic } from "lucide-react";
+import { Search, User, ArrowRight, File, MessageSquare, Mic } from "lucide-react";
 import { Link } from "react-router-dom";
+import { NewClientDialog } from "@/components/clients/NewClientDialog";
 
 // Sample clients data
-const clientsData = [
+const initialClientsData = [
   { id: 1, name: "ABC AG", type: "Corporation", industry: "Finance", casesCount: 5, contact: "John Smith" },
   { id: 2, name: "XYZ GmbH", type: "LLC", industry: "Technology", casesCount: 3, contact: "Jane Doe" },
   { id: 3, name: "Swiss Bank Ltd", type: "Bank", industry: "Banking", casesCount: 7, contact: "Robert Johnson" },
@@ -15,9 +16,23 @@ const clientsData = [
   { id: 5, name: "Geneva Group", type: "Holding", industry: "Real Estate", casesCount: 4, contact: "Michael Brown" },
 ];
 
+// Define client interface
+interface Client {
+  id: number;
+  name: string;
+  type: string;
+  industry: string;
+  casesCount: number;
+  contact: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  notes?: string;
+}
+
 const Clients = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [clients, setClients] = useState(clientsData);
+  const [clients, setClients] = useState<Client[]>(initialClientsData);
 
   // Filter clients based on search query
   const filteredClients = clients.filter(
@@ -27,13 +42,16 @@ const Clients = () => {
       client.contact.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Handle client creation
+  const handleClientCreated = (newClient: Client) => {
+    setClients(prevClients => [newClient, ...prevClients]);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-2xl font-bold text-legal-gray-900">Clients</h1>
-        <Button className="legal-button-primary">
-          <Plus size={18} className="mr-2" /> New Client
-        </Button>
+        <NewClientDialog onClientCreated={handleClientCreated} />
       </div>
 
       <Card className="legal-card">
