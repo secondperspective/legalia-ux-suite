@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Search, User, ArrowRight, File, MessageSquare, Mic } from "lucide-react";
 import { Link } from "react-router-dom";
 import { NewClientDialog } from "@/components/clients/NewClientDialog";
+import { toast } from "sonner";
 
 // Sample clients data
 const initialClientsData = [
@@ -17,7 +18,7 @@ const initialClientsData = [
 ];
 
 // Define client interface
-interface Client {
+export interface Client {
   id: number;
   name: string;
   type: string;
@@ -45,6 +46,7 @@ const Clients = () => {
   // Handle client creation
   const handleClientCreated = (newClient: Client) => {
     setClients(prevClients => [newClient, ...prevClients]);
+    toast.success(`Client "${newClient.name}" wurde erfolgreich angelegt`);
   };
 
   return (

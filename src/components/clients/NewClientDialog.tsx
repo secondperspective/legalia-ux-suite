@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -9,11 +10,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
+import { Client } from "@/pages/Clients";
 
 const clientFormSchema = z.object({
   name: z.string().min(2, {
-    message: "Client name must be at least 2 characters.",
+    message: "Client Name must be at least 2 characters.",
   }),
   type: z.string().min(1, {
     message: "Please select a client type.",
@@ -50,7 +51,7 @@ const defaultValues: Partial<ClientFormValues> = {
 };
 
 interface NewClientDialogProps {
-  onClientCreated: (client: ClientFormValues & { id: number, casesCount: number }) => void;
+  onClientCreated: (client: Client) => void;
 }
 
 export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
@@ -69,7 +70,6 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
     };
     
     onClientCreated(newClient);
-    toast.success("Client created successfully");
     form.reset();
     setOpen(false);
   }
@@ -78,14 +78,14 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="legal-button-primary">
-          <User size={18} className="mr-2" /> New Client
+          <User size={18} className="mr-2" /> Neuer Klient
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
-          <DialogTitle>Add New Client</DialogTitle>
+          <DialogTitle>Neuen Klienten anlegen</DialogTitle>
           <DialogDescription>
-            Enter the client details below. All fields marked with * are required.
+            Geben Sie die Klientendaten unten ein. Alle mit * markierten Felder sind erforderlich.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -96,9 +96,9 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Client Name *</FormLabel>
+                    <FormLabel>Klientenname *</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter client name" {...field} />
+                      <Input placeholder="Klientenname eingeben" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -109,11 +109,11 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
                 name="type"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Client Type *</FormLabel>
+                    <FormLabel>Kliententyp *</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select client type" />
+                          <SelectValue placeholder="Kliententyp auswählen" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -136,11 +136,11 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
                 name="industry"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Industry *</FormLabel>
+                    <FormLabel>Branche *</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select industry" />
+                          <SelectValue placeholder="Branche auswählen" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -163,9 +163,9 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
                 name="contact"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Contact Person *</FormLabel>
+                    <FormLabel>Ansprechpartner *</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter contact person name" {...field} />
+                      <Input placeholder="Name des Ansprechpartners" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -176,9 +176,9 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email Address *</FormLabel>
+                    <FormLabel>E-Mail Adresse *</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="Enter email address" {...field} />
+                      <Input type="email" placeholder="E-Mail eingeben" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -189,9 +189,9 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number *</FormLabel>
+                    <FormLabel>Telefonnummer *</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter phone number" {...field} />
+                      <Input placeholder="Telefonnummer eingeben" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -204,9 +204,9 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
               name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Address *</FormLabel>
+                  <FormLabel>Adresse *</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter client address" {...field} />
+                    <Input placeholder="Adresse des Klienten eingeben" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -218,9 +218,9 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
               name="notes"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Notes</FormLabel>
+                  <FormLabel>Notizen</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Optional notes about this client" {...field} />
+                    <Textarea placeholder="Optionale Notizen zu diesem Klienten" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -229,9 +229,9 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
             
             <DialogFooter className="mt-6">
               <Button type="button" variant="outline" onClick={() => setOpen(false)}>
-                Cancel
+                Abbrechen
               </Button>
-              <Button type="submit">Save Client</Button>
+              <Button type="submit">Klient speichern</Button>
             </DialogFooter>
           </form>
         </Form>
