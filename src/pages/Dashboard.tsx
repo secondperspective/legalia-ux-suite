@@ -7,9 +7,9 @@ import { NewTaskDialog } from "@/components/tasks/NewTaskDialog";
 
 // Sample data for the dashboard
 const initialUpcomingDeadlines = [
-  { id: 1, title: "File tax return for XYZ GmbH", client: "XYZ GmbH", date: "2023-10-15", priority: "high" },
-  { id: 2, title: "Review contract for ABC AG", client: "ABC AG", date: "2023-10-18", priority: "medium" },
-  { id: 3, title: "Prepare legal opinion", client: "Swiss Bank Ltd", date: "2023-10-20", priority: "low" },
+  { id: 1, title: "File tax return for XYZ GmbH", client: "XYZ GmbH", date: "2023-10-15", priority: "high" as const },
+  { id: 2, title: "Review contract for ABC AG", client: "ABC AG", date: "2023-10-18", priority: "medium" as const },
+  { id: 3, title: "Prepare legal opinion", client: "Swiss Bank Ltd", date: "2023-10-20", priority: "low" as const },
 ];
 
 const recentClients = [
@@ -40,7 +40,7 @@ const Dashboard = () => {
       title: formData.title,
       client: formData.clientName,
       date: formData.dueDate,
-      priority: formData.priority,
+      priority: formData.priority as "low" | "medium" | "high",
     };
     
     setTasks((prevTasks) => [...prevTasks, newTask]);
