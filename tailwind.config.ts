@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,26 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom colors for our legal app
+				legal: {
+					primary: "#1A365D",     // Deep navy blue
+					secondary: "#3182CE",   // Medium blue
+					accent: "#63B3ED",      // Light blue
+					success: "#48BB78",     // Green
+					warning: "#ED8936",     // Orange
+					danger: "#E53E3E",      // Red
+					gray: {
+						100: "#F7FAFC",
+						200: "#EDF2F7",
+						300: "#E2E8F0",
+						400: "#CBD5E0",
+						500: "#A0AEC0",
+						600: "#718096",
+						700: "#4A5568",
+						800: "#2D3748",
+						900: "#1A202C",
+					}
 				}
 			},
 			borderRadius: {
@@ -84,11 +105,33 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-out': {
+					'0%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					},
+					'100%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.3s ease-out',
+				'fade-out': 'fade-out 0.3s ease-out'
 			}
 		}
 	},
