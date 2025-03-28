@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -63,7 +62,6 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
   });
 
   function onSubmit(data: ClientFormValues) {
-    // Create a new client with generated ID and zero cases
     const newClient = {
       ...data,
       id: Math.floor(Math.random() * 10000),
@@ -119,12 +117,14 @@ export function NewClientDialog({ onClientCreated }: NewClientDialogProps) {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="Corporation">Corporation</SelectItem>
-                        <SelectItem value="LLC">LLC</SelectItem>
-                        <SelectItem value="Bank">Bank</SelectItem>
-                        <SelectItem value="Insurance">Insurance</SelectItem>
-                        <SelectItem value="Holding">Holding</SelectItem>
-                        <SelectItem value="Individual">Individual</SelectItem>
+                        <SelectItem value="Staat/Volk/Behörden">Staat/Volk/Behörden</SelectItem>
+                        <SelectItem value="Privatrecht/Zivilrecht/Strafrecht">Privatrecht/Zivilrecht/Strafrecht</SelectItem>
+                        <SelectItem value="Schule/Wissenschaft/Kultur">Schule/Wissenschaft/Kultur</SelectItem>
+                        <SelectItem value="Landesverteidigung">Landesverteidigung</SelectItem>
+                        <SelectItem value="Finanzen">Finanzen</SelectItem>
+                        <SelectItem value="Öffentliche Werke/Energie/Verkehr">Öffentliche Werke/Energie/Verkehr</SelectItem>
+                        <SelectItem value="Gesundheit/Arbeit/Soziales">Gesundheit/Arbeit/Soziales</SelectItem>
+                        <SelectItem value="Wirtschaft/Technische Zusammenarbeit">Wirtschaft/Technische Zusammenarbeit</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
